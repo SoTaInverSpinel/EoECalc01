@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:EoECalc01"
+             x:Class="EoECalc01.MainPage">
+    
+   <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="0,20,0,0"
+                    Android="0">
+        </OnPlatform>
+    </ContentPage.Padding>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:EoECalcModel x:Key="model" GoalTime="0" GoalDay="0" GoalHour="0"></local:EoECalcModel>
+            <local:DoubleToStringConverter x:Key="stringConverter"></local:DoubleToStringConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid BindingContext="{StaticResource model}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+           
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--Row0-->
+        <Entry Grid.Row="0" Grid.Column="1" Keyboard="Numeric" Text="{Binding NowCounts,Converter={StaticResource stringConverter}}" ></Entry>
+        <Label Grid.Row="0" Grid.Column="2" Text="counts" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+        <!--Row1-->
+        <Entry Grid.Row="1" Grid.Column="1"  Keyboard="Numeric" Text="{Binding NowSec,Converter={StaticResource stringConverter}}"></Entry>
+        <Label Grid.Row="1" Grid.Column="2" Text="秒" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+        <!--Row2-->
+        <Label Grid.Row="2" Grid.Column="1" Text="{Binding NowCps}"></Label>
+        <Label Grid.Row="2" Grid.Column="2" Text="cps"></Label>
+        <!--Row3-->
+        <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Text="貯めたいカウント"></Label>
+        <Entry Grid.Row="3" Grid.Column="2" Keyboard="Numeric" Text="{Binding GoalCounts,Converter={StaticResource stringConverter}}"></Entry>
+        <!--Row4-->
+        <BoxView Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Color="LightBlue"></BoxView>
+        <!--Row5-->
+        <Label Grid.Row="5" Grid.Column="0"  Text="{Binding GoalTime,StringFormat='{0:0}秒'}" HorizontalTextAlignment="Center"></Label>
+       
+        <!--Row6-->
+        <Label Grid.Row="6" Grid.Column="0" Text="{Binding GoalDay,StringFormat='{0}日'}" HorizontalTextAlignment="End"></Label>
+        <Label Grid.Row="6" Grid.Column="1" Text="{Binding GoalHour,StringFormat='{0}時間'}" HorizontalTextAlignment="End"></Label>
+        <Label Grid.Row="6" Grid.Column="2" Text="{Binding GoalMinute,StringFormat='{0}分'}" HorizontalTextAlignment="End"></Label>
+        <Label Grid.Row="6" Grid.Column="3" Text="{Binding GoalSec,StringFormat='{0}秒'}" HorizontalTextAlignment="End"></Label>
+    </Grid>
+	
+</ContentPage>
